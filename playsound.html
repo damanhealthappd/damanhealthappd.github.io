@@ -1,9 +1,10 @@
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 
 <html>
 
     <head>
-        <title>Audio test</title>
+	    <title>Audio test</title></head>
 
         <!--<script type="text/javascript">
             /**
@@ -43,7 +44,62 @@
 <script src='https://cdn.rawgit.com/admsev/jquery-play-sound/master/jquery.playSound.js'></script>
 	    <body>
 		    <div id="background">
+<!--<audio id="audiotag1" src='http://soundbible.com/grab.php?id=843&type=mp3' preload="auto" autoplay="autoplay"></audio>-->
 <button onclick='$.playSound("http://soundbible.com/grab.php?id=843&type=mp3")'>Test Alarm</button>
 			    </div>
+<script type="text/javascript">
+var alarmFlag = true;
+function playMe(){
+	$.playSound("http://soundbible.com/grab.php?id=843&type=mp3");
+	//$("<audio></audio>").attr({ 
+		//'src':'http://soundbible.com/grab.php?id=843&type=mp3', 
+		//'volume':0.4,
+		//'autoplay':'autoplay'
+	//}).appendTo("body");
+	//$('#audiotag1')[0].play();
+}
+//$.playSound("http://soundbible.com/grab.php?id=843&type=mp3");
+function checkHealthRule(){
+$.ajax({
+            url: 'https://cors-anywhere.herokuapp.com/https://damanhealth.saas.appdynamics.com/controller/rest/applications/7111/problems/healthrule-violations?time-range-type=BEFORE_NOW&duration-in-mins=15',
+            type: 'GET',
+            headers: {
+                'Authorization': 'Basic YXBwZGwxQGRhbWFuaGVhbHRoOkFwcGRsMUAzMjE0',
+				'X-Requested-With': 'XMLHttpRequest'
+            },
+            success: function (result) {
+                //CallBack(result);
+				var str = new XMLSerializer().serializeToString(result.documentElement);
+				if(str.includes('DHPO Pending Requests High')){
+					if(alarmFlag){
+						playMe();
+						alarmFlag = false;
+						console.log('alarmFlag = false');
+					} else {
+						console.log('alarmFlag = true');
+					}
+					//alert('Success!');
+					console.log('Alert \'DHPO Pending Requests High\' found');
+				} else {
+					console.log('Alert \'DHPO Pending Requests High\' not found');
+				}
+            },
+            error: function (error) {
+                
+            }
+        });
+}
+function resetAlarmFlag(){
+	if(!alarmFlag){
+		alarmFlag = true;
+		console.log('resetAlarmFlag() -> alarmFlag = false');
+	} else {
+		console.log('resetAlarmFlag() -> alarmFlag = false');
+	}
+}
+checkHealthRule();
+setInterval(checkHealthRule, 30000);
+setInterval(resetAlarmFlag, 900000);
+</script>
 	    </body>
 </html>
