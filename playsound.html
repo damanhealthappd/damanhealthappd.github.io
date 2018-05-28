@@ -70,7 +70,7 @@ $.ajax({
             success: function (result) {
                 //CallBack(result);
 				var str = new XMLSerializer().serializeToString(result.documentElement);
-				if(str.includes('DHPO Pending Requests High') || str.includes('Shafafiya Pending Request is High')){
+				if(str.includes('DHPO Pending Requests High') || str.includes('Shafafiya Pending Requests High')){
 					if(alarmFlag){
 						playMe();
 						alarmFlag = false;
