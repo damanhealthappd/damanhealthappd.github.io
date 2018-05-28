@@ -70,7 +70,7 @@ $.ajax({
             success: function (result) {
                 //CallBack(result);
 				var str = new XMLSerializer().serializeToString(result.documentElement);
-				if(str.includes('DHPO Pending Requests High')){
+				if(str.includes('DHPO Pending Requests High') || str.includes('Shafafiya Pending Request is High')){
 					if(alarmFlag){
 						playMe();
 						alarmFlag = false;
@@ -79,9 +79,9 @@ $.ajax({
 						console.log('alarmFlag = true');
 					}
 					//alert('Success!');
-					console.log('Alert \'DHPO Pending Requests High\' found');
+					console.log('Alert \'DHPO/Shafafiya Pending Requests High\' found');
 				} else {
-					console.log('Alert \'DHPO Pending Requests High\' not found');
+					console.log('Alert \'DHPO/Shafafiya Pending Requests High\' not found');
 				}
             },
             error: function (error) {
