@@ -70,7 +70,9 @@ $.ajax({
             success: function (result) {
                 //CallBack(result);
 				var str = new XMLSerializer().serializeToString(result.documentElement);
-				if(str.includes('DHPO Pending Requests High') || str.includes('Shafafiya Pending Requests High')){
+				if(str.includes('DHPO Pending Requests High') || str.includes('Shafafiya Pending Requests High') 
+				   || str.includes('PBM Downlaods not received in DCTM') 
+				   || str.includes('DCTM high number of request going to manual')){
 					if(alarmFlag){
 						playMe();
 						alarmFlag = false;
