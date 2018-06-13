@@ -71,25 +71,25 @@ $.ajax({
                 //CallBack(result);
 				var str = new XMLSerializer().serializeToString(result.documentElement);
 				if(str.includes('DHPO Pending Requests High') || str.includes('Shafafiya Pending Requests High') 
-				   || str.includes('PBM Downlaods not received in DCTM') 
-				   || str.includes('DCTM high number of request going to manual')
-				   || str.includes('PBM auto average high than threshold')){
+				   || str.includes('PBM Downloads not received') 
+				   || str.includes('Request to Manual')
+				   || str.includes('PBM auto average high')){
 					var alertname = "NA";
 					if(str.includes('DHPO Pending Requests High')){
 						alertname = "media/pend_prior_req_dhpo.mp3";
 					} else if(str.includes('Shafafiya Pending Requests High')) {
 						alertname = "media/pend_prior_req_shafafiya.mp3";
-					} else if(str.includes('PBM Downlaods not received in DCTM - Dubai')) {
+					} else if(str.includes('DCTM - Dubai - PBM Downloads not received')) {
 						alertname = "media/no_pbm_req_dubai.mp3";
-					} else if(str.includes('PBM Downlaods not received in DCTM - Abu Dhabi')) {
+					} else if(str.includes('DCTM - Abu Dhabi - PBM Downloads not received')) {
 						alertname = "media/no_pbm_req_abu_dhabi.mp3";
-					} else if(str.includes('DCTM high number of request going to manual - Dubai')) {
+					} else if(str.includes('DCTM - Dubai - Request to Manual')) {
 						alertname = "media/manual_pbm_count_dubai.mp3";
-					} else if(str.includes('DCTM high number of request going to manual - Abu Dhabi')) {
+					} else if(str.includes('DCTM - Abu Dhabi - Request to Manual')) {
 						alertname = "media/manual_pbm_count_abu_dhabi.mp3";
-					} else if(str.includes('PBM auto average high than threshold - Dubai')) {
+					} else if(str.includes('PBM auto average high - Dubai')) {
 						alertname = "media/pbm_auto_avg_dubai.mp3";
-					} else if(str.includes('PBM auto average high than threshold - Abu Dhabi')) {
+					} else if(str.includes('PBM auto average high - Abu Dhabi')) {
 						alertname = "media/pbm_auto_avg_abu_dhabi.mp3";
 					} 
 					if(alarmFlag){
