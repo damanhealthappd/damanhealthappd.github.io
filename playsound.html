@@ -48,8 +48,9 @@
 <button onclick='$.playSound("media/manual_pbm_count_abu_dhabi.mp3")'>Test Alarm</button>
 <script type="text/javascript">
 var alarmFlag = true;
-function playMe(){
-	$.playSound("http://soundbible.com/grab.php?id=843&type=mp3");
+function playMe(playfile){
+	//$.playSound("http://soundbible.com/grab.php?id=843&type=mp3");
+	$.playSound(playfile);
 	//$("<audio></audio>").attr({ 
 		//'src':'http://soundbible.com/grab.php?id=843&type=mp3', 
 		//'volume':0.4,
@@ -71,9 +72,28 @@ $.ajax({
 				var str = new XMLSerializer().serializeToString(result.documentElement);
 				if(str.includes('DHPO Pending Requests High') || str.includes('Shafafiya Pending Requests High') 
 				   || str.includes('PBM Downlaods not received in DCTM') 
-				   || str.includes('DCTM high number of request going to manual')){
+				   || str.includes('DCTM high number of request going to manual')
+				   || str.includes('PBM auto average high than threshold')){
+					var alertname = "NA";
+					if(str.includes('DHPO Pending Requests High')){
+						alertname = "media/pend_prior_req_dhpo.mp3";
+					} else if(str.includes('Shafafiya Pending Requests High')) {
+						alertname = "media/pend_prior_req_shafafiya.mp3";
+					} else if(str.includes('PBM Downlaods not received in DCTM - Dubai')) {
+						alertname = "media/no_pbm_req_dubai.mp3";
+					} else if(str.includes('PBM Downlaods not received in DCTM - Abu Dhabi')) {
+						alertname = "media/no_pbm_req_abu_dhabi.mp3";
+					} else if(str.includes('DCTM high number of request going to manual - Dubai')) {
+						alertname = "media/manual_pbm_count_dubai.mp3";
+					} else if(str.includes('DCTM high number of request going to manual - Abu Dhabi')) {
+						alertname = "media/manual_pbm_count_abu_dhabi.mp3";
+					} else if(str.includes('PBM auto average high than threshold - Dubai')) {
+						alertname = "media/pbm_auto_avg_dubai.mp3";
+					} else if(str.includes('PBM auto average high than threshold - Abu Dhabi')) {
+						alertname = "media/pbm_auto_avg_abu_dhabi.mp3";
+					} 
 					if(alarmFlag){
-						playMe();
+						playMe(alertname);
 						alarmFlag = false;
 						console.log('alarmFlag = false');
 					} else {
