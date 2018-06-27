@@ -70,10 +70,7 @@ $.ajax({
             success: function (result) {
                 //CallBack(result);
 				var str = new XMLSerializer().serializeToString(result.documentElement);
-				if(str.includes('DHPO Pending Requests High') || str.includes('Shafafiya Pending Requests High') 
-				   || str.includes('PBM Downloads not received') 
-				   || str.includes('Request to Manual')
-				   || str.includes('PBM auto average high')){
+				if(str.includes('DHPO Pending Requests High') || str.includes('Shafafiya Pending Requests High')){
 					var alertname = "NA";
 					if(str.includes('DHPO Pending Requests High')){
 						alertname = "media/pend_prior_req_dhpo.mp3";
@@ -107,8 +104,7 @@ $.ajax({
             success: function (result) {
                 //CallBack(result);
 				var str = new XMLSerializer().serializeToString(result.documentElement);
-				if(str.includes('DHPO Pending Requests High') || str.includes('Shafafiya Pending Requests High') 
-				   || str.includes('PBM Downloads not received') 
+				if(str.includes('PBM Downloads not received') 
 				   || str.includes('Request to Manual')
 				   || str.includes('PBM auto average high')){
 					var alertname = "NA";
