@@ -1,0 +1,153 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html>
+
+    <head>
+	    <title>Audio test</title></head>
+
+        <!--<script type="text/javascript">
+            /**
+             * @param {string} filename The name of the file WITHOUT ending
+             */
+            function playSound(filename){   
+                document.getElementById("sound").innerHTML='<audio autoplay="autoplay"><source src="' + filename + '.mp3" type="audio/mpeg" /><source src="' + filename + '.ogg" type="audio/ogg" /><embed hidden="true" autostart="true" loop="false" src="' + filename +'.mp3" /></audio>';
+            }
+        </script>
+    </head>
+    <body>
+        <!-- Will try to play bing.mp3 or bing.ogg (depends on browser compatibility) 
+        <button onclick="playSound('bing');">Play</button>  
+        <div id="sound"></div>
+    </body>-->
+	
+	<script src='https://code.jquery.com/jquery-2.2.0.min.js'></script>
+	    <script type="text/css">
+	    #background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('images/background.jpg');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: 100%;
+    opacity: 0.8;
+    filter:alpha(opacity=80);
+}
+	    </script>
+<script src='https://cdn.rawgit.com/admsev/jquery-play-sound/master/jquery.playSound.js'></script>
+	    <body style="background:transparent">
+<!--<audio id="audiotag1" src='http://soundbible.com/grab.php?id=843&type=mp3' preload="auto" autoplay="autoplay"></audio>-->
+<button onclick='$.playSound("media/manual_pbm_count_abu_dhabi.mp3")'>Test Alarm</button>
+<script type="text/javascript">
+var alarmFlag = true;
+function playMe(playfile){
+	//$.playSound("http://soundbible.com/grab.php?id=843&type=mp3");
+	$.playSound(playfile);
+	//$("<audio></audio>").attr({ 
+		//'src':'http://soundbible.com/grab.php?id=843&type=mp3', 
+		//'volume':0.4,
+		//'autoplay':'autoplay'
+	//}).appendTo("body");
+	//$('#audiotag1')[0].play();
+}
+//$.playSound("http://soundbible.com/grab.php?id=843&type=mp3");
+function checkHealthRule(){
+$.ajax({
+            url: 'https://cors-anywhere.herokuapp.com/https://damanhealth.saas.appdynamics.com/controller/rest/applications/7111/problems/healthrule-violations?time-range-type=BEFORE_NOW&duration-in-mins=2',
+            type: 'GET',
+            headers: {
+                'Authorization': 'Basic YXBwZGwxQGRhbWFuaGVhbHRoOkFwcGRsMUAzMjE0',
+				'X-Requested-With': 'XMLHttpRequest'
+            },
+            success: function (result) {
+                //CallBack(result);
+				var str = new XMLSerializer().serializeToString(result.documentElement);
+				if(str.includes('DHPO Pending Requests High') || str.includes('Shafafiya Pending Requests High') 
+				   || str.includes('PBM Downloads not received') 
+				   || str.includes('Request to Manual')
+				   || str.includes('PBM auto average high')){
+					var alertname = "NA";
+					if(str.includes('DHPO Pending Requests High')){
+						alertname = "media/pend_prior_req_dhpo.mp3";
+					} else if(str.includes('Shafafiya Pending Requests High')) {
+						alertname = "media/pend_prior_req_shafafiya.mp3";
+					}
+					if(alarmFlag){
+						playMe(alertname);
+						alarmFlag = false;
+						console.log('alarmFlag = false');
+					} else {
+						console.log('alarmFlag = true');
+					}
+					//alert('Success!');
+					console.log('Alert \'DHPO/Shafafiya Pending Requests High\' found');
+				} else {
+					console.log('Alert \'DHPO/Shafafiya Pending Requests High\' not found');
+				}
+            },
+            error: function (error) {
+                
+            }
+        });
+$.ajax({
+            url: 'https://cors-anywhere.herokuapp.com/https://damanhealth.saas.appdynamics.com/controller/rest/applications/6995/problems/healthrule-violations?time-range-type=BEFORE_NOW&duration-in-mins=2',
+            type: 'GET',
+            headers: {
+                'Authorization': 'Basic YXBwZGwxQGRhbWFuaGVhbHRoOkFwcGRsMUAzMjE0',
+				'X-Requested-With': 'XMLHttpRequest'
+            },
+            success: function (result) {
+                //CallBack(result);
+				var str = new XMLSerializer().serializeToString(result.documentElement);
+				if(str.includes('DHPO Pending Requests High') || str.includes('Shafafiya Pending Requests High') 
+				   || str.includes('PBM Downloads not received') 
+				   || str.includes('Request to Manual')
+				   || str.includes('PBM auto average high')){
+					var alertname = "NA";
+					if(str.includes('DCTM - Dubai - PBM Downloads not received')) {
+						alertname = "media/no_pbm_req_dubai.mp3";
+					} else if(str.includes('DCTM - Abu Dhabi - PBM Downloads not received')) {
+						alertname = "media/no_pbm_req_abu_dhabi.mp3";
+					} else if(str.includes('DCTM - Dubai - Request to Manual')) {
+						alertname = "media/manual_pbm_count_dubai.mp3";
+					} else if(str.includes('DCTM - Abu Dhabi - Request to Manual')) {
+						alertname = "media/manual_pbm_count_abu_dhabi.mp3";
+					} else if(str.includes('PBM auto average high - Dubai')) {
+						alertname = "media/pbm_auto_avg_dubai.mp3";
+					} else if(str.includes('PBM auto average high - Abu Dhabi')) {
+						alertname = "media/pbm_auto_avg_abu_dhabi.mp3";
+					} 
+					if(alarmFlag){
+						playMe(alertname);
+						alarmFlag = false;
+						console.log('alarmFlag = false');
+					} else {
+						console.log('alarmFlag = true');
+					}
+					//alert('Success!');
+					console.log('Alert \'DHPO/Shafafiya Pending Requests High\' found');
+				} else {
+					console.log('Alert \'DHPO/Shafafiya Pending Requests High\' not found');
+				}
+            },
+            error: function (error) {
+                
+            }
+        });
+}
+function resetAlarmFlag(){
+	if(!alarmFlag){
+		alarmFlag = true;
+		console.log('resetAlarmFlag() -> alarmFlag = false');
+	} else {
+		console.log('resetAlarmFlag() -> alarmFlag = false');
+	}
+}
+checkHealthRule();
+setInterval(checkHealthRule, 55000);
+setInterval(resetAlarmFlag, 900000);
+</script>
+	    </body>
+</html>
