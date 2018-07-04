@@ -72,9 +72,9 @@ $.ajax({
 				var str = new XMLSerializer().serializeToString(result.documentElement);
 				if(str.includes('DHPO Pending Requests High') || str.includes('Shafafiya Pending Requests High')){
 					var alertname = "NA";
-					if(str.includes('DHPO Pending Requests High')){
+					if(str.includes('DHPO Pending Requests count High')){
 						alertname = "media/pend_prior_req_dhpo.mp3";
-					} else if(str.includes('Shafafiya Pending Requests High')) {
+					} else if(str.includes('Shafafiya Pending Requests count High')) {
 						alertname = "media/pend_prior_req_shafafiya.mp3";
 					}
 					if(alarmFlag){
