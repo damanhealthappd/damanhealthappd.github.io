@@ -39,6 +39,19 @@ $(document).ready(function() {
     .build()
     .play();
 });
+  
+  function tryMeDemo() {
+    var audio = document.getElementById('talkify-audio');
+    var sources = audio.getElementsByTagName("source");
+    var msg = document.getElementsByName("message")[0].value;
+
+    if(msg==""){
+      msg = "Please type something";
+    } 
+    sources[0].src = "https://talkify.net/api/speech/v1?text="+msg+"&key=a2a8cfec-9d50-4c94-a135-b1b178538f6e"
+
+    audio.load();
+}
 
 </script>
 </head>
@@ -48,8 +61,14 @@ $(document).ready(function() {
       This demo will load automatically, be patient.
   </h3>
   <p>
-    Hi, this is a short demo of the Talkify library. Let me describe some of my features.
+    Hi, this is a short demo of the custom text-to-speech solution implemented for DAMAN. Start typing below and hit play.
   </p>
+  <form>
+  <textarea name="message" rows="10" cols="30">The cat was playing in the garden.</textarea>
+  <br>
+  <input type="submit" onclick="tryMeDemo()">
+  </form>
+  <!--
   <p>
     I work for any elements, such as paragraphs, divs and many more. I also support many languages and I will detect them automatically for you, like this:
   </p>
@@ -64,12 +83,12 @@ $(document).ready(function() {
   </p>
   <p>
     Hej, jag kan vara till stor hjälp om du försöker lära dig svenska
-  </p>
+  </p>-->
+  
 </section>
 
 
 <script src="https://use.fontawesome.com/28b687dd3d.js"></script>
-
 </body>
 <!--
   <head>
