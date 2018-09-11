@@ -44,12 +44,32 @@ $(document).ready(function() {
     //var audio = document.getElementById('talkify-audio');
     //var sources = audio.getElementsByTagName("source");
     var msg = document.getElementsByName("message")[0].value;
+	//console.log(window.speechSynthesis.getVoices());
 
-    if(msg==""){
-      msg = "Please type something";
-    } 
-    var player = new talkify.Html5Player(); //new talkify.TtsPlayer() or new talkify.Html5Player()
-    player.playText(''+msg);
+	var timer = setInterval(function() {
+    var voices = window.speechSynthesis.getVoices();
+    console.log(voices);
+		if (voices.length !== 0) {
+			if(msg==""){
+				msg = "Please type something";
+			} 
+			var player = new talkify.Html5Player(); //new talkify.TtsPlayer() or new talkify.Html5Player().enableTextHighlighting()
+			//player.forceVoice = "Google UK English Female";
+			player.forceVoice(voices[5]);
+			player.setRate(0.9);
+			player.forceLanguage('en-EN');
+			player.playText(''+msg);
+			clearInterval(timer);
+		}
+	}, 200);
+	
+	/*var playlist = new talkify.playlist()
+        .begin()
+        .usingPlayer(player)
+        .withTextInteraction()
+        .withElements(document.querySelectorAll('p')) //<--Any element you'd like. Leave blank to let Talkify make a good guess
+        .build() //<-- Returns an instance.
+        .play();*/
 }
 
 </script>
