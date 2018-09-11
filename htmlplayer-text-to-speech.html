@@ -49,7 +49,7 @@ $(document).ready(function() {
       msg = "Please type something";
     } 
     var player = new talkify.Html5Player(); //new talkify.TtsPlayer() or new talkify.Html5Player()
-    player.playText('msg');
+    player.playText(''+msg);
 }
 
 </script>
@@ -64,7 +64,7 @@ $(document).ready(function() {
   </p>
   
   <form>
-  <textarea name="message" rows="4" cols="80">The cat was playing in the garden.</textarea>
+  <textarea name="message" rows="4" cols="80">WARNING! Last 10 minutes - Dubai - PBM auto average is more than the defined threshold.</textarea>
   <br>
   <input type="button" onclick="tryMeDemo()" value="Play">
   </form>
