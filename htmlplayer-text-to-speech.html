@@ -1,0 +1,119 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+.talkify-audio-control {
+  color: white;
+}
+
+.fa-2x {
+  font-size: 20px !important;
+}
+</style>
+<link rel="stylesheet" href="https://rawgit.com/Hagsten/Talkify/master/styles/talkify-playlist.css">
+<link rel="stylesheet" href="https://rawgit.com/Hagsten/Talkify/master/styles/talkify-common.css">
+<link rel="stylesheet" href="https://rawgit.com/Hagsten/Talkify/master/styles/talkify-audiocontrols.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="https://rawgit.com/Hagsten/Talkify/master/dist/talkify.min.js"></script>
+<script>
+/*talkify.config.remoteService.host = 'https://talkify.net';
+//talkify.config.remoteService.apiKey = '46b32f4e-6b73-40ee-8ae1-4a17cb1b18f6';
+talkify.config.remoteService.apiKey = 'a2a8cfec-9d50-4c94-a135-b1b178538f6e';
+  
+
+talkify.config.ui.audioControls = {
+  enabled: true, //<-- Disable to get the browser built in audio controls
+  container: document.getElementById("player-and-voices")
+};
+
+$(document).ready(function() {
+  var player = new talkify.TtsPlayer()
+    .enableTextHighlighting();
+
+  var playlist = new talkify.playlist()
+    .begin()
+    .usingPlayer(player)
+    .withRootSelector('#root')
+    .withTextInteraction()
+    .build()
+    .play();
+});*/
+  
+  function tryMeDemo() {
+    //var audio = document.getElementById('talkify-audio');
+    //var sources = audio.getElementsByTagName("source");
+    var msg = document.getElementsByName("message")[0].value;
+
+    if(msg==""){
+      msg = "Please type something";
+    } 
+    var player = new talkify.Html5Player(); //new talkify.TtsPlayer() or new talkify.Html5Player()
+    player.playText('msg');
+}
+
+</script>
+</head>
+<body>
+<section id="root">
+  <h3>
+      This demo will load automatically, be patient.
+  </h3>
+  <p>
+    Hi, this is a short demo of the custom text-to-speech solution implemented for DAMAN. Start typing below and hit play.
+  </p>
+  
+  <form>
+  <textarea name="message" rows="4" cols="80">The cat was playing in the garden.</textarea>
+  <br>
+  <input type="button" onclick="tryMeDemo()" value="Play">
+  </form>
+  <!--
+  <p>
+    I work for any elements, such as paragraphs, divs and many more. I also support many languages and I will detect them automatically for you, like this:
+  </p>
+  <p>
+    Hey, ich kann sehr hilfreich sein, wenn Sie versuchen, Deutsch zu lernen werden
+  </p>
+  <p>
+    嘿，我是非常有益的，如果你正在努力学习德语
+  </p>
+  <p>
+    あなたはドイツ語を学ぼうとしている場合はねえ、私は非常に役に立ちます
+  </p>
+  <p>
+    Hej, jag kan vara till stor hjälp om du försöker lära dig svenska
+  </p>-->
+  
+</section>
+
+
+<script src="https://use.fontawesome.com/28b687dd3d.js"></script>
+</body>
+<!--
+  <head>
+    <script src="https://rawgit.com/Hagsten/Talkify/master/dist/talkify.min.js"></script>
+    
+  </head>
+  <body>
+    <script>
+      talkify.config = {
+    remoteService: {
+        host : 'https://talkify.net',
+        apiKey : 'a2a8cfec-9d50-4c94-a135-b1b178538f6e',
+        active: true //True to use Talkifys language engine and hosted voices. False only works for Html5Player.
+    },
+    ui:
+    {
+        audioControls: { //If enabled, replaces the built in audio controls. Especially good for the Web Speech API bits
+            enabled: true,
+            container: document.body
+        }
+    }
+}
+      var player = new talkify.TtsPlayer(); //or new talkify.Html5Player()
+player.playText('Hello world');
+    </script>
+  </body>
+-->
+</html>
