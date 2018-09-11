@@ -1,0 +1,72 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+.talkify-audio-control {
+  color: white;
+}
+
+.fa-2x {
+  font-size: 20px !important;
+}
+</style>
+<link rel="stylesheet" href="https://rawgit.com/Hagsten/Talkify/master/styles/talkify-playlist.css">
+<link rel="stylesheet" href="https://rawgit.com/Hagsten/Talkify/master/styles/talkify-common.css">
+<link rel="stylesheet" href="https://rawgit.com/Hagsten/Talkify/master/styles/talkify-audiocontrols.css">
+
+<script src="https://rawgit.com/Hagsten/Talkify/master/dist/talkify.min.js"></script>
+<script>
+talkify.config.remoteService.host = 'https://talkify.net';
+talkify.config.remoteService.apiKey = '46b32f4e-6b73-40ee-8ae1-4a17cb1b18f6';
+
+talkify.config.ui.audioControls = {
+  enabled: true, //<-- Disable to get the browser built in audio controls
+  container: document.getElementById("player-and-voices")
+};
+
+$(document).ready(function() {
+  var player = new talkify.TtsPlayer()
+    .enableTextHighlighting();
+
+  var playlist = new talkify.playlist()
+    .begin()
+    .usingPlayer(player)
+    .withRootSelector('#root')
+    .withTextInteraction()
+    .build()
+    .play();
+});
+
+</script>
+</head>
+<body>
+<section id="root">
+  <h3>
+      This demo will load automatically, be patient.
+  </h3>
+  <p>
+    Hi, this is a short demo of the Talkify library. Let me describe some of my features.
+  </p>
+  <p>
+    I work for any elements, such as paragraphs, divs and many more. I also support many languages and I will detect them automatically for you, like this:
+  </p>
+  <p>
+    Hey, ich kann sehr hilfreich sein, wenn Sie versuchen, Deutsch zu lernen werden
+  </p>
+  <p>
+    嘿，我是非常有益的，如果你正在努力学习德语
+  </p>
+  <p>
+    あなたはドイツ語を学ぼうとしている場合はねえ、私は非常に役に立ちます
+  </p>
+  <p>
+    Hej, jag kan vara till stor hjälp om du försöker lära dig svenska
+  </p>
+</section>
+
+
+<script src="https://use.fontawesome.com/28b687dd3d.js"></script>
+
+</body>
+</html>
