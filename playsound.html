@@ -120,6 +120,10 @@ $.ajax({
 						alertname = "media/pbm_auto_avg_dubai.mp3";
 					} else if(str.includes('PBM auto average high - Abu Dhabi')) {
 						alertname = "media/pbm_auto_avg_abu_dhabi.mp3";
+					} else if(str.includes('Manual PBM BRMS')) {
+						alertname = "media/manual_pbm_count_dubai.mp3";
+					} else if(str.includes('Manual PBM Request')) {
+						alertname = "media/manual_pbm_count_abu_dhabi.mp3";
 					} 
 					if(alarmFlag){
 						playMe(alertname);
