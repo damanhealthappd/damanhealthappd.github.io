@@ -124,6 +124,8 @@ $.ajax({
 						alertname = "media/manual_pbm_count_dubai.mp3";
 					} else if(str.includes('Manual PBM Request')) {
 						alertname = "media/manual_pbm_count_abu_dhabi.mp3";
+					} else if(str.includes('BRMS Calls per min Threshold')) {
+						alertname = "media/brms_cut_off_claims.mp3";
 					} 
 					if(alarmFlag){
 						playMe(alertname);
