@@ -124,9 +124,7 @@ $.ajax({
 						alertname = "media/manual_pbm_count_dubai.mp3";
 					} else if(str.includes('Manual PBM Request')) {
 						alertname = "media/manual_pbm_count_abu_dhabi.mp3";
-					} else if(str.includes('BRMS Calls per min Threshold')) {
-						alertname = "media/brms_cut_off_claims.mp3";
-					} 
+					}
 					if(alarmFlag){
 						playMe(alertname);
 						alarmFlag = false;
@@ -138,6 +136,38 @@ $.ajax({
 					console.log('Alert \'DHPO/Shafafiya Pending Requests High\' found');
 				} else {
 					console.log('Alert \'DHPO/Shafafiya Pending Requests High\' not found');
+				}
+            },
+            error: function (error) {
+                
+            }
+        });
+  $.ajax({
+            url: 'https://cors-anywhere.herokuapp.com/https://damanhealth.saas.appdynamics.com/controller/rest/applications/7111/problems/healthrule-violations?time-range-type=BEFORE_NOW&duration-in-mins=2',
+            type: 'GET',
+            headers: {
+                'Authorization': 'Basic YXBwZGwxQGRhbWFuaGVhbHRoOkFwcGRsMUAzMjE0',
+				'X-Requested-With': 'XMLHttpRequest'
+            },
+            success: function (result) {
+                //CallBack(result);
+				var str = new XMLSerializer().serializeToString(result.documentElement);
+				if(str.includes('BRMS Calls per min Threshold')){
+					var alertname = "NA";
+					if(str.includes('BRMS Calls per min Threshold')){
+						alertname = "media/brms_cut_off_claims.mp3";
+					}
+					if(alarmFlag){
+						playMe(alertname);
+						alarmFlag = false;
+						console.log('alarmFlag = false');
+					} else {
+						console.log('alarmFlag = true');
+					}
+					//alert('Success!');
+					console.log('Alert \'BRMS Calls per min Threshold\' found');
+				} else {
+					console.log('Alert \'BRMS Calls per min Threshold\' not found');
 				}
             },
             error: function (error) {
