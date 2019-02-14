@@ -107,7 +107,8 @@ $.ajax({
 				var str = new XMLSerializer().serializeToString(result.documentElement);
 				if(str.includes('PBM Downloads not received') 
 				   || str.includes('Request to Manual')
-				   || str.includes('PBM auto average high')){
+				   || str.includes('PBM auto average high')
+				   || str.includes('EID DCTM High Avg. Response')){
 					var alertname = "NA";
 					if(str.includes('DCTM - Dubai - PBM Downloads not received')) {
 						alertname = "media/no_pbm_req_dubai.mp3";
@@ -125,6 +126,8 @@ $.ajax({
 						alertname = "media/manual_pbm_count_dubai.mp3";
 					} else if(str.includes('Manual PBM Request')) {
 						alertname = "media/manual_pbm_count_abu_dhabi.mp3";
+					}else if(str.includes('EID DCTM High Avg. Response')) {
+						alertname = "media/EID_DCTM_Alert.mp3";
 					}
 					if(alarmFlag){
 						playMe(alertname);
