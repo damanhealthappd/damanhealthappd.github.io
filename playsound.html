@@ -186,7 +186,9 @@ $.ajax({
             success: function (result) {
                 //CallBack(result);
 				var str = new XMLSerializer().serializeToString(result.documentElement);
-				if(str.includes('PBM auto average high - Abu Dhabi') || str.includes('PBM auto average high - Dubai') || str.includes('EID DCTM High Avg. Response')){
+				if(str.includes('PBM auto average high - Abu Dhabi') 
+                  || str.includes('PBM auto average high - Dubai') 
+				  || str.includes('EID DCTM High Avg. Response')){
 					var alertname = "NA";
 					if(str.includes('PBM auto average high - Abu Dhabi')){
 						alertname = "media/PBM_AbuDhabi_Alert.mp3";
