@@ -147,7 +147,7 @@ $.ajax({
             }
         });
   $.ajax({
-            url: 'https://cors-anywhere.herokuapp.com/https://damanhealth.saas.appdynamics.com/controller/rest/applications/7111/problems/healthrule-violations?time-range-type=BEFORE_NOW&duration-in-mins=2',
+            url: 'https://cors-anywhere.herokuapp.com/https://damanhealth.saas.appdynamics.com/controller/rest/applications/6995/problems/healthrule-violations?time-range-type=BEFORE_NOW&duration-in-mins=2',
             type: 'GET',
             headers: {
                 'Authorization': 'Basic YXBwZGwxQGRhbWFuaGVhbHRoOkFwcGRsMUAzMjE0',
@@ -156,10 +156,10 @@ $.ajax({
             success: function (result) {
                 //CallBack(result);
 				var str = new XMLSerializer().serializeToString(result.documentElement);
-				if(str.includes('BRMS Calls per min Threshold')){
+				if(str.includes('BRMS Not Triggered Today')){
 					var alertname = "NA";
-					if(str.includes('BRMS Calls per min Threshold')){
-						alertname = "media/brms_cut_off_claims.mp3";
+					if(str.includes('BRMS Not Triggered Today')){
+						alertname = "media/BRMS_Not_triggered.mp3";
 					}
 					if(alarmFlag){
 						playMe(alertname);
@@ -169,9 +169,9 @@ $.ajax({
 						console.log('alarmFlag = true');
 					}
 					//alert('Success!');
-					console.log('Alert \'BRMS Calls per min Threshold\' found');
+					console.log('Alert \'BRMS Not Triggered Today\' found');
 				} else {
-					console.log('Alert \'BRMS Calls per min Threshold\' not found');
+					console.log('Alert \'BRMS Not Triggered Today\' not found');
 				}
             },
             error: function (error) {
