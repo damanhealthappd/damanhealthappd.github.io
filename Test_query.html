@@ -1,0 +1,54 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html>
+
+    <head>
+	    <title>Audio test</title></head>
+
+        <!--<script type="text/javascript">
+            /**
+             * @param {string} filename The name of the file WITHOUT ending new
+             */
+            function playSound(filename){   
+                document.getElementById("sound").innerHTML='<audio autoplay="autoplay"><source src="' + filename + '.mp3" type="audio/mpeg" /><source src="' + filename + '.ogg" type="audio/ogg" /><embed hidden="true" autostart="true" loop="false" src="' + filename +'.mp3" /></audio>';
+            }
+        </script>
+    </head>
+    <body>
+        <!-- Will try to play bing.mp3 or bing.ogg (depends on browser compatibility) 
+        <button onclick="playSound('bing');">Play</button>  
+        <div id="sound"></div>
+    </body>-->
+	
+	<script src='jquery-2.2.0.min.js'></script>
+	    <script type="text/css">
+	    #background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('images/background.jpg');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: 100%;
+    opacity: 0.8;
+    filter:alpha(opacity=80);
+}
+	    </script>
+<script src='/jquery.playSound.js'></script>
+	    <body style="background:transparent">
+<!--<audio id="audiotag1" src='http://soundbible.com/grab.php?id=843&type=mp3' preload="auto" autoplay="autoplay"></audio>-->
+<button onclick='$.playSound("media/manual_pbm_count_abu_dhabi.mp3")'>Test Alarm</button>
+<script type="text/javascript">
+var alarmFlag = true;
+function playMe(playfile){
+	//$.playSound("http://soundbible.com/grab.php?id=843&type=mp3");
+	$.playSound(playfile);
+	//$("<audio></audio>").attr({ 
+		//'src':'http://soundbible.com/grab.php?id=843&type=mp3', 
+		//'volume':0.4,
+		//'autoplay':'autoplay'
+	//}).appendTo("body");
+	//$('#audiotag1')[0].play();
+}
