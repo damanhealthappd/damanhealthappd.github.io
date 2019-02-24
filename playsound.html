@@ -71,12 +71,16 @@ $.ajax({
             success: function (result) {
                 //CallBack(result);
 				var str = new XMLSerializer().serializeToString(result.documentElement);
-				if(str.includes('DHPO Pending Requests count High') || str.includes('Shafafiya Pending Requests count High')){
+				if(str.includes('DHPO Pending Requests count High') || str.includes('Shafafiya Pending Requests count High') || str.includes('OJ Processing Time - Basic') || str.includes('OJ Processing Time - Thiqa')){
 					var alertname = "NA";
 					if(str.includes('DHPO Pending Requests count High')){
 						alertname = "media/pend_prior_req_dhpo.mp3";
 					} else if(str.includes('Shafafiya Pending Requests count High')) {
 						alertname = "media/pend_prior_req_shafafiya.mp3";
+					} else if(str.includes('OJ Processing Time - Basic')) {
+						alertname = "media/Daman_Basic.mp3";
+					} else if(str.includes('OJ Processing Time - Thiqa')) {
+						alertname = "media/Daman_Thiqa.mp3";
 					}
 					if(alarmFlag){
 						playMe(alertname);
