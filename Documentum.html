@@ -70,13 +70,13 @@ $.ajax({
             success: function (result) {
                 //CallBack(result);
 				var str = new XMLSerializer().serializeToString(result.documentElement);
-				if(str.includes('DFS Broken Pipe Error') || str.includes('DFS ReadTimeout Error') || str.includes('Total Session')){
+				if(str.includes('DFS Broken Pipe Error') || str.includes('DFS ReadTimeout Error') || str.includes('Inactive_Sessions_Count')){
 					var alertname = "NA";
 					if(str.includes('DFS Broken Pipe Error')){
 						alertname = "media/DFS Broken Pipe Alert.mp3";
 					} else if(str.includes('DFS ReadTimeout Error')) {
 						alertname = "media/DFS ReadTimeout ALert.mp3";
-					} else if(str.includes('Total Session')) {
+					} else if(str.includes('Inactive_Sessions_Count')) {
 						alertname = "media/Total Session.mp3";
 					}
 					if(alarmFlag){
