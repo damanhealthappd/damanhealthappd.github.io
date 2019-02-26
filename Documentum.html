@@ -1,0 +1,113 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html>
+
+    <head>
+	    <title>Audio test</title></head>
+
+        <!--<script type="text/javascript">
+            /**
+             * @param {string} filename The name of the file WITHOUT ending new
+             */
+            function playSound(filename){   
+                document.getElementById("sound").innerHTML='<audio autoplay="autoplay"><source src="' + filename + '.mp3" type="audio/mpeg" /><source src="' + filename + '.ogg" type="audio/ogg" /><embed hidden="true" autostart="true" loop="false" src="' + filename +'.mp3" /></audio>';
+            }
+
+        </script>
+    </head>
+
+    <body>
+
+        <!-- Will try to play bing.mp3 or bing.ogg (depends on browser compatibility) 
+        <button onclick="playSound('bing');">Play</button>  
+        <div id="sound"></div>
+
+    </body>-->
+	
+	<script src='jquery-2.2.0.min.js'></script>
+	    <script type="text/css">
+	    #background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('images/background.jpg');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: 100%;
+    opacity: 0.8;
+    filter:alpha(opacity=80);
+}
+
+	    </script>
+<script src='jquery.playSound.js'></script>
+	    <body style="background:transparent">
+<!--<audio id="audiotag1" src='http://soundbible.com/grab.php?id=843&type=mp3' preload="auto" autoplay="autoplay"></audio>-->
+<button onclick='$.playSound("media/manual_pbm_count_abu_dhabi.mp3")'>Test Alarm</button>
+<script type="text/javascript">
+var alarmFlag = true;
+function playMe(playfile){
+	//$.playSound("http://soundbible.com/grab.php?id=843&type=mp3");
+	$.playSound(playfile);
+	//$("<audio></audio>").attr({ 
+		//'src':'http://soundbible.com/grab.php?id=843&type=mp3', 
+		//'volume':0.4,
+		//'autoplay':'autoplay'
+	//}).appendTo("body");
+	//$('#audiotag1')[0].play();
+}
+//$.playSound("http://soundbible.com/grab.php?id=843&type=mp3");
+function checkHealthRule(){
+$.ajax({
+            url: 'https://cors-anywhere.herokuapp.com/https://damanhealth.saas.appdynamics.com/controller/rest/applications/7111/problems/healthrule-violations?time-range-type=BEFORE_NOW&duration-in-mins=2',
+            type: 'GET',
+            headers: {
+                //'Authorization': 'Basic YXBwZGwxQGRhbWFuaGVhbHRoOkFwcGRsMUAzMjE0'
+		'Authorization': 'Bearer eyJraWQiOiIxIiwiYWxnIjoiSFMyNTYifQ.eyJpc3MiOiJBcHBEeW5hbWljcyIsImF1ZCI6IkFwcERfQVBJcyIsImV4cCI6MTU3ODM4ODY1NSwianRpIjoiYnQ5cGRBQmxZckxPNUhNcVVjcjR6QSIsImlhdCI6MTU0Njg1MjY1NSwibmJmIjoxNTQ2ODUyNTM1LCJzdWIiOiJnZXRoZWFsdGhydWxlcyIsInR5cGUiOiJBUElfQ0xJRU5UIiwiaWQiOiI4ZjU4YWUzMS02N2VmLTQ5ODQtYjY3OS04ODFjMGY1NDEwM2MiLCJhY2N0SWQiOiI0ODAzNTI4OS02ZTM1LTQ1MTItOTk2Yi04MWZhMzgzNTk5MDUiLCJhY2N0TmFtZSI6ImRhbWFuaGVhbHRoIn0.zLFHGXx334zES9M8yo5sdQ8PVSak-sy252HnyrlfcNo',
+				'X-Requested-With': 'XMLHttpRequest'
+            },
+            success: function (result) {
+                //CallBack(result);
+				var str = new XMLSerializer().serializeToString(result.documentElement);
+				if(str.includes('DFS Broken Pipe Error') || str.includes('DFS ReadTimeout Error') || str.includes('Total Session')){
+					var alertname = "NA";
+					if(str.includes('DFS Broken Pipe Error')){
+						alertname = "media/DFS Broken Pipe Alert.mp3";
+					} else if(str.includes('DFS ReadTimeout Error')) {
+						alertname = "media/DFS ReadTimeout ALert.mp3";
+					} else if(str.includes('Total Session')) {
+						alertname = "media/Total Session.mp3";
+					}
+					if(alarmFlag){
+						playMe(alertname);
+						alarmFlag = false;
+						console.log('alarmFlag = false');
+					} else {
+						console.log('alarmFlag = true');
+					}
+					//alert('Success!');
+					console.log('Alert \'DFS BrokenPipe/ReadTimeout/TotalSessions Error\' found');
+				} else {
+					console.log('Alert \'DFS BrokenPipe/ReadTimeout/TotalSessions Error\' not found');
+				}
+            },
+            error: function (error) {
+                
+            }
+        });
+}
+function resetAlarmFlag(){
+	if(!alarmFlag){
+		alarmFlag = true;
+		console.log('resetAlarmFlag() -> alarmFlag = false');
+	} else {
+		console.log('resetAlarmFlag() -> alarmFlag = false');
+	}
+}
+checkHealthRule();
+setInterval(checkHealthRule, 55000);
+setInterval(resetAlarmFlag, 900000);
+</script>
+	    </body>
+</html>
